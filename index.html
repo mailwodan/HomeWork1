@@ -11,7 +11,7 @@
 
     <body>
         <div id="homeWork1">
-            <form action="javascript:void()" method="post">
+            <form @submit.prevent="" v-show="!isPrepare">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName" v-model="firstName">
@@ -27,7 +27,7 @@
                 </div>
                 <button class="but btn-info" v-on:click="isPrepare = !isPrepare">Preview</button>
             </form>
-            <div>
+            <div v-show="isPrepare">
                 <table class="table table-bordered">
                     <tr>
                         <td>First Name</td>
@@ -44,10 +44,7 @@
                                 <tr v-for="(peson, index) in personListCopy">
                                     <td>
                                         {{peson.name}}
-
                                     </td>
-
-
                                 </tr>
                             </table>
                         </td>
