@@ -11,7 +11,7 @@
 
     <body>
         <div id="homeWork1">
-            <form action="javascript:void()" method="post" v-if="!isPrepare">
+            <form action="javascript:void()" method="post">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName" v-model="firstName">
@@ -21,14 +21,40 @@
                     <input type="text" class="form-control" id="lastName" v-model="lastName">
                 </div>
                 <button class="but btn-warning" v-on:click="addPerson">Add Person</button>
-                <div v-for="peson in personList">
+                <div v-for="(peson, index) in personList">
+                    <label v-on:dblclick="deletePerson(index)">Addition person ({{index + 1}}):</label>
                     <input type="text" class="form-control" id="lastName" v-model="peson.name">
                 </div>
                 <button class="but btn-info" v-on:click="isPrepare = !isPrepare">Preview</button>
             </form>
-            <template v-else>
+            <div>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{firstName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{lastName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Addition Persons </td>
+                        <td>
+                            <table class="table table-bordered">
+                                <tr v-for="(peson, index) in personListCopy">
+                                    <td>
+                                        {{peson.name}}
+
+                                    </td>
+
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
                 <button type="submit" class="but btn-success">Send</button>
-            </template>
+            </div>
         </div>
         <script src="main.js"></script>
     </body>
