@@ -8,7 +8,8 @@ new Vue({
     },
     methods: {
         addPerson(){
-            personList.push('');
+            this.personList.push({});
+            console.log(this.personList);
         }
         
     }

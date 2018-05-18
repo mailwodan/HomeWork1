@@ -22,7 +22,7 @@
                 </div>
                 <button class="but btn-warning" v-on:click="addPerson">Add Person</button>
                 <div v-for="peson in personList">
-                    <input type="text" class="form-control" id="lastName" v-model="peson">
+                    <input type="text" class="form-control" id="lastName" v-model="peson.name">
                 </div>
                 <button class="but btn-info" v-on:click="isPrepare = !isPrepare">Preview</button>
             </form>
