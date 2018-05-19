@@ -1,26 +1,39 @@
 new Vue({
-    el: '#homeWork1',
+    el: getElement(),
     data: {
-        isPrepare: false,
-        firstName: '',
-        lastName: '',
-        personList: []
+        isPrepared: false,
+        personData: {
+            firstName: {
+                displayLabel: 'First Name',
+                useData: ''
+            },
+            lastName: {
+                displayLabel: 'Last Name',
+                useData: ''
+            },
+            email: {
+                displayLabel: 'EMail',
+                useData: ''
+            }
+        },
+        additionPersons: [],
+        testField: 'Hello World !!!'
+    },
+    computed: {
+        getFullName(){
+            return this.personData.firstName.useData + ' ' + this.personData.lastName.useData;
+        }
     },
     methods: {
         addPerson(){
-            this.personList.push({});
-            console.log(this.personList);
+            this.additionPersons.push({});
         },
-        deletePerson(index){
-            console.log(index);
-            console.log(this.personList);
-            this.personList.splice(index, 1);
-        }
-        
-    },
-    computed: {
-        personListCopy(){
-            return this.personList;
+        delPerson(aIndex){
+            this.additionPersons.splice(aIndex, 1);
         }
     }
-});
+})
+
+function getElement() {
+    return '#homeWork1';
+}

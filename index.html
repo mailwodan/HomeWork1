@@ -4,56 +4,63 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home Work 1</title>
+    <title>Invited list person</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <script src="https://unpkg.com/vue"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" </head>
+</head>
 
-    <body>
-        <div id="homeWork1">
-            <form @submit.prevent="" v-show="!isPrepare">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" v-model="firstName">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" v-model="lastName">
-                </div>
-                <button class="but btn-warning" v-on:click="addPerson">Add Person</button>
-                <div v-for="(peson, index) in personList">
-                    <label v-on:dblclick="deletePerson(index)">Addition person ({{index + 1}}):</label>
-                    <input type="text" class="form-control" id="lastName" v-model="peson.name">
-                </div>
-                <button class="but btn-info" v-on:click="isPrepare = !isPrepare">Preview</button>
-            </form>
-            <div v-show="isPrepare">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>First Name</td>
-                        <td>{{firstName}}</td>
-                    </tr>
-                    <tr>
-                        <td>Last Name</td>
-                        <td>{{lastName}}</td>
-                    </tr>
-                    <tr>
-                        <td>Addition Persons </td>
-                        <td>
-                            <table class="table table-bordered">
-                                <tr v-for="(peson, index) in personListCopy">
-                                    <td>
-                                        {{peson.name}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <button type="submit" class="but btn-success">Send</button>
+<body>
+
+    <div class="container" id="homeWork1">
+        <h1>{{testField}}</h1>
+
+        <form @submit.prevent="" method="POST" role="form" v-show="!isPrepared">
+            <legend>Persons Data:</legend>
+            <div class="form-group" v-for="(iValue, iName, iIndex) in personData">
+                <label>{{iName}} ({{iValue.displayLabel}})</label>
+                <input type="text" class="form-control" v-model="iValue.useData">
             </div>
+            <hr>
+            <h3>Addition persons:</h3>
+            <div>
+                <button type="button" class="btn btn-info" @click="addPerson">Add</button>
+                <div style="margin-top: 20px" v-for="(aPerson, aIndex) in additionPersons">
+                    <label @dblclick="delPerson(aIndex)">Addition Person:</label>
+                    <input type="text" class="form-control" v-model="aPerson.name">
+                </div>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary" @click="isPrepared=!isPrepared">Prepare Report</button>
+        </form>
+        <div v-show="isPrepared">
+
+            <table class="table table-bordered table-hover">
+                {{getFullName}}
+                <tr v-for="(iValue, iName, iIndex) in personData">
+                    <td>{{iValue.displayLabel}}</td>
+                    <td>{{iValue.useData}}</td>
+                </tr>
+                <tr>
+                    <td>Addition persons</td>
+                    <td>
+
+                        <table class="table table-bordered table-hover">
+                            <tr v-for="aPerson in additionPersons">
+                                <td>{{aPerson.name}}</td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+
         </div>
-        <script src="main.js"></script>
-    </body>
+    </div>
+
+    <script src="main.js"></script>
+</body>
 
 </html>
